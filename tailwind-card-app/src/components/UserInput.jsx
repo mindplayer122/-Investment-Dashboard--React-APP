@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import './UserInput.css';
 
 
 
-const UserInput = (userInput, onInputHandler, onReset, currency, setCurrency, Rates) => {
+const UserInput = ({userInput, onInputHandler, onReset, currency, setCurrency, Rates}) => {
 
     const currencySymbols ={GBP: "£", USD: "$", EUR: "€"};
 
@@ -25,29 +25,29 @@ const UserInput = (userInput, onInputHandler, onReset, currency, setCurrency, Ra
                 </div>
                 <div className="input-group">
                     <label htmlFor="intInvestment">Initial Investment ({currencySymbols[currency]})</label>
-                    <input type="number" id="intInvestment" value={convert(userInput.intInvestment)}
-                    onChange={(e) => inputHandler('intInvestment', e.target.value / Rates[currency])}
+                    <input type="number" id="intInvestment" value={userInput.intInvestment}
+                    onChange={(e) => onInputHandler('intInvestment', e.target.value)}
                     required min="0"/>
                 </div>
                 <div className="input-group">
-                    <label htmlFor="annInvestment">Annual Investment ({currencySymbols[currency])</label>
-                    <input type="number" id="annInvestment" value={convert(userInput.annInvestment)}
-                    onChange={(e) => inputHandler('annInvestment', e.target.value / Rates[currency])}  
+                    <label htmlFor="annInvestment">Annual Investment ({currencySymbols[currency]})</label>
+                    <input type="number" id="annInvestment" value={userInput.annInvestment}
+                    onChange={(e) => onInputHandler('annInvestment', e.target.value)}  
                     required min="0"/>
                 </div>
                 <div className="input-group">
                     <label htmlFor="expReturn">Expected Return (%)</label>
                     <input type="number" id="expReturn" value={userInput.expReturn}
-                    onChange={(e) => inputHandler('expReturn', e.target.value)}  required min="0"/>
+                    onChange={(e) => onInputHandler('expReturn', e.target.value)}  required min="0"/>
                 </div>
                 <div className="input-group">
                     <label htmlFor="duration">Duration (years)</label>
                     <input type="number" id="duration" value={userInput.duration}
-                    onChange={(e) => inputHandler('duration', e.target.value)}  required min="0"/>
+                    onChange={(e) => onInputHandler('duration', e.target.value)}  required min="0"/>
                 </div>
                 
                 <div className="actions">
-                    <button type="reset" onClick={resetHander}>
+                    <button type="reset" onClick={onReset}>
                         Reset
                     </button>
                 </div>
