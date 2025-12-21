@@ -1,15 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {calInvResult} from '../util/investment';
 import{ LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid} from "recharts";
+import { generatePDF } from '../util/generatePDF';
+import { useMemo } from 'react';
 
 
 const OutputData = ({inputValue}) => {
-    const resultData = calInvResult(inputValue);
+    const resultData = useMemo(() =>{
+        return calInvResult(inputValue);
+    }, [inputValue]);
 
     const maxInterest = Math.max(...resultData.map(item => item.interest));
+    const[loading, setLoading] = useState(true);
 
+    useEffect(() => {
+        setLoading(true);
+        const timer = setTimeout(() => setLoading(false), 500);
+        return () => clearTimeout(timer);
+    }, [inputValue]);
+
+    if(loading) {
+        return<p>Caculating result...</p>;
+    }
   return (
-    <div>
+    <div className='container'>
         <table>
         <thead>
             <tr>
@@ -46,9 +60,13 @@ const OutputData = ({inputValue}) => {
         <Line type="monotone" dataKey="intValue" stroke='#8884d8'/>
         <Line type='monotone' dataKey="totalInterest" stroke="#82ca9d"/>
     </LineChart>
-    </div>
-     
-    
+
+    {resultData.length > 0 && (
+        <button onClick={() => generatePDF(resultData, inputValue)}>
+            Download PDF Report
+        </button>
+    )}
+    </div> 
   )
 }
 

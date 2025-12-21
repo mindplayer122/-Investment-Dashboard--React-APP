@@ -18,6 +18,8 @@ const Initialvalues ={
 export default function App() {
   const [userInput, setUserInput] = useState({Initialvalues});
   const [currency, setCurrency] = useState("GBP");
+  const [error , setError] = useState("");
+
 
   const Rates = {
         GBP: 1,
@@ -26,10 +28,33 @@ export default function App() {
     };
 
   const inputHandler = (inputId, newValue) => {
-        setUserInput((prev) => ({
-            ...prev,
-            [inputId]: +newValue
-        }));
+    const value = +newValue;
+    if(isNaN(value) || value < 0){
+      alert("please entera valid non-negative number");
+      return;
+    }
+
+    if(newValue === ""){
+      setError("all fields are required.");
+      return;
+    }
+
+    if(newValue < 0){
+      setError("values cannot be negative.");
+      return;
+     }
+
+     if(inputId === "duration" && value < 1){
+      setError("Duration must be at least 1 year.");
+      return;
+     }
+
+     setError("");
+
+    setUserInput((prev) => ({
+        ...prev,
+        [inputId]: +newValue
+    }));
     };
 
     const resetHandler = ()=> {
@@ -46,7 +71,7 @@ export default function App() {
         setCurrency={setCurrency}
         Rates={Rates}
       />
-      
+      {error && <p className="error-text">{error}</p>}  
 
     <OutputData inputValue={userInput}/>
     </>

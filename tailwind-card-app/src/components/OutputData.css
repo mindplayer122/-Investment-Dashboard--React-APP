@@ -1,10 +1,25 @@
+
+.container
+{
+    background-color: #2a2a2a;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid #444;
+    align-content: center;
+}
+
 table
 {
     width: 100%;
     border-collapse: collapse;
     margin-top: 2rem;
+    margin: 0 auto;
 }
 
+thead
+{
+    background-color: #34495e;
+}
 
 th, td
 {
@@ -21,4 +36,21 @@ th{
 
 tr:nth-child(even) {
     background-color: #423e3e;
+}
+
+button
+{
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: #34495e;
+    color: white;
+}
+
+.recharts-wrapper{
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
 }
