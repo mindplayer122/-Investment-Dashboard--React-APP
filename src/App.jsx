@@ -62,7 +62,7 @@ export default function App() {
     };
 
   return (
-    <>
+    <div className='page'>
     <Header title='Investment Calculator' subtitle='Plan your Financial future'/>
     <UserInput
         userInput={userInput}
@@ -74,7 +74,7 @@ export default function App() {
       {error && <p className="error-text">{error}</p>}  
 
     <OutputData inputValue={userInput}/>
-    </>
+    </div>
   );
 }
 
