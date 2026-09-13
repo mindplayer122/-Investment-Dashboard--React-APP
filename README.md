@@ -4,7 +4,7 @@ A React investment calculator that estimates investment growth based on an initi
 
 ## Live Demo
 
-[View Live Demo]((https://investment-dashboar-react-app.vercel.app))
+[View Live Demo](https://investment-dashboar-react-app.vercel.app)
 
 ## Features
 
